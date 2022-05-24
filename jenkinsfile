@@ -12,16 +12,12 @@ pipeline {
                 // Get some code from a GitHub repository
                 git 'https://github.com/dilinrajds/KarateTest.git'
 
-                // Run Maven on a Unix agent.
+                // Run Maven on a Windows
                 sh "mvn test -Dtest=TestUsersRunner"
             }
 
             post {
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
-                success {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.jar'
+                       echo 'DONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
                 }
             }
         }
