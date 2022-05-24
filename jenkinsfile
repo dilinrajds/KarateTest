@@ -14,8 +14,6 @@ pipeline {
 
                 // Run Maven on a Unix agent.
                 sh "mvn test -Dtest=TestUsersRunner"
-
-                  echo 'Pulling...' + env.BRANCH_NAME
             }
 
             post {
