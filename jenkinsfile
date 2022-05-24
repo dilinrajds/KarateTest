@@ -13,7 +13,7 @@ pipeline {
                 git 'https://github.com/dilinrajds/KarateTest.git'
 
                 // Run Maven on a Windows
-                sh "mvn test -Dtest=TestUsersRunner"
+                bat "mvn test -Dtest=TestUsersRunner"
             }
 
             post {
