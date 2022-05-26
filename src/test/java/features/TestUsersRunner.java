@@ -1,10 +1,17 @@
 package features;
 
-import org.junit.runner.RunWith;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import com.intuit.karate.junit4.Karate;
+import org.junit.jupiter.api.Test;
 
-@RunWith(Karate.class)
+import com.intuit.karate.Results;
+import com.intuit.karate.Runner;
+
 public class TestUsersRunner {
-
+	
+    @Test
+    void testParallel() {
+        Results results = Runner.path("classpath:features").parallel(5);
+        assertEquals(0, results.getFailCount(), results.getErrorMessages());
+    }
 }

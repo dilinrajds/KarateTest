@@ -27,10 +27,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.intuit.karate</groupId>
-			<artifactId>karate-junit4</artifactId>
+			<artifactId>karate-junit5</artifactId>
 			<version>1.2.0</version>
 			<scope>test</scope>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -55,6 +56,18 @@
 			<artifactId>karate-core</artifactId>
 			<version>1.2.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mock-server</groupId>
+			<artifactId>mockserver-netty</artifactId>
+			<version>5.13.2</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+		<dependency>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 	</dependencies>
 
 
@@ -70,6 +83,11 @@
 		<pluginManagement>
 			<!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
 			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.22.2</version>
+				</plugin>
 				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
 				<plugin>
 					<artifactId>maven-clean-plugin</artifactId>
@@ -83,10 +101,6 @@
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.0</version>
-				</plugin>
-				<plugin>
-					<artifactId>maven-surefire-plugin</artifactId>
-					<version>2.22.1</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-jar-plugin</artifactId>
