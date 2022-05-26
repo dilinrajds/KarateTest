@@ -14,7 +14,6 @@ pipeline {
 
                 // Run Maven on a Windows
                 bat "mvn test -Dtest=SimpleMockServerTest"
-                bat "mvn test -Dtest=TestUsersRunner"
             }
 
             post {
