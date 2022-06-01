@@ -9,11 +9,15 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/dilinrajds/KarateTest.git'
+            script {
 
+                def props = readJSON file: 'pipeLine.json'
+
+				git props['git-repo']
+				
                 // Run Maven on a Windows
-                bat "mvn test -Dtest=SimpleMockServerTest"
+               bat props['smoke-suite']
+               }
             }
 
             post {
@@ -25,3 +29,4 @@ pipeline {
             }
     }
 }
+

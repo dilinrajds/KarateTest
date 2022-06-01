@@ -13,18 +13,15 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.mock.Expectation;
 import org.mockserver.model.Parameter;
 
-import com.intuit.karate.Results;
-import com.intuit.karate.Runner.Builder;
+import com.intuit.karate.junit5.Karate;
 
-public class SimpleMockServerTest {
+public class SimpleMockServerTestRunner {
 
 	private static ClientAndServer mockServer;
 
@@ -62,7 +59,6 @@ public class SimpleMockServerTest {
 				.when(request("/apusers/{userId}").withPathParameter(Parameter.param("userId", "2")))
 				.respond(response().withBody(body3));
 
-		System.out.println(expectations);
 	}
 
 	@AfterAll
@@ -70,13 +66,9 @@ public class SimpleMockServerTest {
 		mockServer.stop();
 	}
 
-	@Test
-	public void simpleTest() {
+	@Karate.Test
+	Karate simpleTest() {
 
-		Builder aBuilder = new Builder();
-		aBuilder.path("classpath:test/java/file/callApi.feature");
-		Results result = aBuilder.parallel(1);
-		Assertions.assertEquals(0, result.getFailCount());
+		return Karate.run("callApi").relativeTo(getClass());
 	}
-
 }
