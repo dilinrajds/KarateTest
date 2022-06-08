@@ -9,18 +9,23 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/dilinrajds/KarateTest.git'
+            script {
 
-                // Run Maven on a Windows
-               bat "mvn test -Dtest=TestUsersRunner"
+                def props = readJSON file: 'pipeLine.json'
+
+			   git props['git-repo']
+			   
+               bat props['smoke-suite']
+               }
             }
 
             post {
                                       success {
                  echo 'DONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'
                 }
+
                 }
-        }
+            }
     }
 }
+

@@ -1,10 +1,11 @@
 package features;
 
-import org.junit.runner.RunWith;
+import com.intuit.karate.junit5.Karate;
 
-import com.intuit.karate.junit4.Karate;
-
-@RunWith(Karate.class)
 public class TestUsersRunner {
-
+	
+	@Karate.Test
+    Karate testParallel() {
+    	return Karate.run("karateSetWithKarateCore").relativeTo(getClass());
+    }
 }
