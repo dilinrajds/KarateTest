@@ -13,11 +13,14 @@
 				"text": "To keep ReqRes free, contributions towards server costs are appreciated!"
 			}
 		},
+		"keyValue1": "/api/users/2"
+	},
+	{
 		"response2": {
 			"data": {
 				"id": 2,
 				"email": "dilin@reqres.in",
-				"first_name": "Dilin",
+				"first_name": "Dilin Raj",
 				"last_name": "Dilin",
 				"avatar": "https://reqres.in/img/faces/1-image.jpg"
 			},
@@ -26,6 +29,9 @@
 				"text": "To keep ReqRes free, contributions towards server costs are appreciated!"
 			}
 		},
+		"keyValue2": "/apusers/1"
+	},
+	{
 		"response3": {
 			"data": {
 				"id": 3,
@@ -38,6 +44,7 @@
 				"url": "https://reqres.in/#support-heading",
 				"text": "To keep ReqRes free, contributions towards server costs are appreciated!"
 			}
-		}
+		},
+		"keyValue3": "/apusers/2"
 	}
 ]

@@ -8,18 +8,17 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.mockserver.client.MockServerClient;
 import org.mockserver.integration.ClientAndServer;
-import org.mockserver.mock.Expectation;
-import org.mockserver.model.Parameter;
 
 import com.intuit.karate.junit5.Karate;
+
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
+import net.minidev.json.parser.ParseException;
 
 public class SimpleMockServerTestRunner {
 
@@ -27,11 +26,9 @@ public class SimpleMockServerTestRunner {
 
 	@BeforeAll
 	public static void startMockServer() throws IOException, ParseException {
-		mockServer = startClientAndServer(9092);
-		String body = "";
-		String body2 = "";
-		String body3 = "";
-
+		mockServer = startClientAndServer(0);
+		
+		
 		JSONParser jsonParser = new JSONParser();
 		System.out.println(new File("mockValue.json").getAbsoluteFile());
 		FileReader reader = new FileReader("mockValue.json");
@@ -39,26 +36,20 @@ public class SimpleMockServerTestRunner {
 
 		JSONArray responseList = (JSONArray) obj;
 		System.out.println(responseList);
-
+		
+		int i = 1;
 		for (Object o : responseList) {
 			JSONObject response = (JSONObject) o;
-			body = response.get("response1").toString();
-			body2 = response.get("response2").toString();
-			body3 = response.get("response3").toString();
+			new MockServerClient("localhost", mockServer.getLocalPort())
+					.when(request(response.get("keyValue" + i).toString()))
+					.respond(response().withBody(response.get("response" + i).toString()));
+			i++;
 		}
+	}
 
-		Expectation[] expectations = new MockServerClient("localhost", mockServer.getLocalPort())
-				.when(request("/ap/users/{userId}").withPathParameter(Parameter.param("userId", "1")))
-				.respond(response().withBody(body));
-
-		Expectation[] expectations2 = new MockServerClient("localhost", mockServer.getLocalPort())
-				.when(request("/apusers/{userId}").withPathParameter(Parameter.param("userId", "1")))
-				.respond(response().withBody(body2));
-
-		Expectation[] expectations3 = new MockServerClient("localhost", mockServer.getLocalPort())
-				.when(request("/apusers/{userId}").withPathParameter(Parameter.param("userId", "2")))
-				.respond(response().withBody(body3));
-
+	public int getServerPort() {
+		int port = mockServer.getLocalPort();
+		return port;
 	}
 
 	@AfterAll
@@ -69,6 +60,6 @@ public class SimpleMockServerTestRunner {
 	@Karate.Test
 	Karate simpleTest() {
 
-		return Karate.run("callApi").relativeTo(getClass());
+		return Karate.run("callApi.feature").relativeTo(getClass());
 	}
 }
