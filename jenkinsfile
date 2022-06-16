@@ -1,3 +1,4 @@
+@Library('shared_libs')_
 pipeline {
     agent any
 
@@ -12,10 +13,10 @@ pipeline {
             script {
 
                 def props = readJSON file: 'pipeLine.json'
-
-			   git props['git-repo']
-			   
-               bat props['smoke-suite']
+		git props['git-repo']
+				
+                // call Groovy
+	       runKarate(props['mvn_cmd'])
                }
             }
 
