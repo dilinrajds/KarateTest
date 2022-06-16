@@ -1,4 +1,4 @@
 {
 	"git-repo" : "https://github.com/dilinrajds/KarateTest.git",
-	"smoke-suite" : "mvn test -Dtest=SimpleMockServerTestRunner"
+	"mvn_cmd" : "mvn test"
 }
