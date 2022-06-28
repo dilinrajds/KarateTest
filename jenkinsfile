@@ -18,7 +18,7 @@ pipeline {
                 // call Groovy
 	       runKarate(props['mvn_cmd'])
 	        publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/karate-reports', reportFiles: 'karate-summary.html', reportName: 'Karate Report', reportTitles: ''])
-    
+    submitJUnitTestResultsToqTest([apiKey: 'a0989345-198a-4eb8-9e2b-e00d55fb7294', containerID: 320045, containerType: 'release', createTestCaseForEachJUnitTestClass: true, createTestCaseForEachJUnitTestMethod: false, overwriteExistingTestSteps: true, parseTestResultsFromTestingTools: false, projectID: 79500, qtestURL: 'https://dilinraj.qtestnet.com', submitToAReleaseAsSettingFromQtest: true, submitToExistingContainer: false, utilizeTestResultsFromCITool: true])
                }
             }
 
